@@ -11,6 +11,7 @@ Gives the user the option to restart the program
 #include "pch.h"
 #include <iostream>
 #include <string>
+#include <locale>
 
 char vowel_bank[6] = { 'a','e','i','o','u','\0' };
 
@@ -38,12 +39,14 @@ std::string output_result(const int vowel_count, char* c_string)
 
 int main()
 {
-	char input_string[128];
 	char c_string[128];
-	while (std::strncmp(input_string, "N", 1) != 0)
+	char input_string[128];
+	char restart_response[2];
+
+	while (std::strncmp(restart_response, "N", 1) != 0)
 	{
-		const auto menu = "* Welcome to the Vowel Counter *\n*                              *\n* Please enter a word..        *";
-		const auto restart = "* Do you want to restart the program? (Y or N) *\n";
+		const auto menu = "* Welcome to the Vowel Counter *\n*                              *\n*     Please enter a word      *\n";
+		const auto restart = "\n\n* Do you want to restart the program? *\n* Any key to continue or 'N' to exit  *\n";
 
 		std::cout << menu;
 		std::cin.getline(input_string, 128);
@@ -54,8 +57,7 @@ int main()
 
 		std::cout << menu_output;
 		std::cout << restart;
-		std::cin.getline(input_string, 1);
-		//if (std::cin.fail()) std::cout << "Invalid input, please try again!" << std::endl;
+		std::cin.getline(restart_response, 2);
 	}
 }
 
